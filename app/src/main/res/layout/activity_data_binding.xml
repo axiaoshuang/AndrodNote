@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data class="DBTestBinding">
+        <variable
+            name="user"
+            type="com.ltc.helloandroid.databinding.User"/>
+    </data>
+<LinearLayout
+    android:id="@+id/activity_data_binding"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:context="com.ltc.helloandroid.databinding.DataBindingActivity">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@{user.userName}"
+        />
+    <TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:onClick="@{(view)->user.onClick(view)}"
+    android:text="@{user.content}"
+    />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:imageUrl="@{user.imaUrl}"
+        />
+</LinearLayout>
+</layout>

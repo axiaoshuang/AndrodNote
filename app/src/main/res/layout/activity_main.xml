@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<com.google.android.flexbox.FlexboxLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    app:alignContent="flex_start"
+    app:alignItems="flex_start"
+    app:flexWrap="wrap"
+    app:showDivider="beginning|middle"
+    tools:context="com.ltc.helloandroid.MainActivity">
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="DataBinding"
+        android:id="@+id/data_binding"
+        />
+
+</com.google.android.flexbox.FlexboxLayout>
