@@ -1,17 +1,20 @@
 package com.ltc.helloandroid.databinding;
 
+import android.databinding.BaseObservable;
+import android.databinding.Bindable;
 import android.databinding.BindingAdapter;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.android.databinding.library.baseAdapters.BR;
 import com.bumptech.glide.Glide;
 
 /**
- * Created by 李天成 on 2016/11/8.
+ * Created by ltc on 2016/11/8.
  */
 
-public class User implements Cloneable {
+public class User extends BaseObservable implements Cloneable {
     private String userName;
     private String psw;
     private String content;
@@ -42,20 +45,7 @@ public class User implements Cloneable {
         this.imaUrl=url;
     }
 
-    @Override
-    public int hashCode() {
-        return 1;
-    }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (obj instanceof User) {
-            User user = (User) obj;
-            return user.getUserName().equals(getUserName());
-        }
-
-        return super.equals(obj);
-    }
 
     @Override
     public User clone(){
@@ -83,7 +73,7 @@ public class User implements Cloneable {
     public void setPsw(String psw) {
         this.psw = psw;
     }
-
+    @Bindable
     public String getContent() {
         return content;
     }
@@ -92,10 +82,13 @@ public class User implements Cloneable {
         this.content = content;
     }
     public void onClick(View view){
-        Toast.makeText(view.getContext(), content, Toast.LENGTH_SHORT).show();
+        setContent("张三被点击了");
+        //刷新局部 通过@Bindable注释绑定字段
+       notifyPropertyChanged(BR.content);
+        //全部刷新 notifyChange();
     }
-    @BindingAdapter("bind:imageUrl")
-    public static void imaUrl(ImageView imageView ,String url){
+    @BindingAdapter("imageUrl")
+    public  static void imaUrl(ImageView imageView ,String url){
         Glide.with(imageView.getContext()).load(url).into(imageView);
 
     }
