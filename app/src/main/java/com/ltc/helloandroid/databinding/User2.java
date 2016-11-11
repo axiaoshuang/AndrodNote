@@ -3,11 +3,8 @@ package com.ltc.helloandroid.databinding;
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
 import android.databinding.BindingAdapter;
-import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.databinding.library.baseAdapters.BR;
 import com.bumptech.glide.Glide;
@@ -18,7 +15,7 @@ import java.util.Locale;
  * Created by ltc on 2016/11/8.
  */
 
-public class User extends BaseObservable implements Cloneable {
+public class User2 extends BaseObservable implements Cloneable {
     private String userName;
     private String content;
 
@@ -41,7 +38,7 @@ public class User extends BaseObservable implements Cloneable {
                 '}';
     }
 
-    public User(String userName, String content, String url) {
+    public User2(String userName, String content, String url) {
         this.userName = userName;
         this.content = content;
         this.imaUrl = url;
@@ -49,10 +46,10 @@ public class User extends BaseObservable implements Cloneable {
 
 
     @Override
-    public User clone() {
-        User sc = null;
+    public User2 clone() {
+        User2 sc = null;
         try {
-            sc = (User) super.clone();
+            sc = (User2) super.clone();
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();
         }
@@ -68,7 +65,6 @@ public class User extends BaseObservable implements Cloneable {
     }
 
 
-
     @Bindable
     public String getContent() {
         return content;
@@ -79,16 +75,15 @@ public class User extends BaseObservable implements Cloneable {
     }
 
     public void onClick(View view) {
-
-            setContent(String.format(Locale.getDefault(), getContent() + "%s", "被点击了"));
-            //刷新局部 通过@Bindable注释绑定字段
-            notifyPropertyChanged(BR.content);
-            //全部刷新 notifyChange();
+        setContent(String.format(Locale.getDefault(),getContent()+"%s","被点击了"));
+        //刷新局部 通过@Bindable注释绑定字段
+        notifyPropertyChanged(BR.content);
+        //全部刷新 notifyChange();
     }
 
-    @BindingAdapter({"imageUrl","erro"})
-    public static void imaUrl(ImageView imageView, String url,Drawable erro) {
-        Glide.with(imageView.getContext()).load(url).error(erro).into(imageView);
+    @BindingAdapter({"imageUrl"})
+    public static void imaUrl(ImageView imageView, String url) {
+        Glide.with(imageView.getContext()).load(url).into(imageView);
 
     }
 }

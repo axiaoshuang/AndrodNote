@@ -20,6 +20,7 @@
         android:orientation="horizontal"
         >
         <ImageView
+            app:erro="@{@drawable/ic_launcher}"
             android:layout_width="50dp"
             android:layout_height="50dp"
             app:imageUrl="@{user.imaUrl}"
@@ -28,7 +29,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{user.userName}"
+            android:text="@{user.content}"
+            android:onClick="@{(view)->user.onClick(view)}"
             />
     </LinearLayout>
 </layout>
