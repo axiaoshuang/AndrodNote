@@ -40,7 +40,6 @@ public class DBAdapter extends RecyclerView.Adapter <DBAdapter.DBViewHolder>{
         Object object = list.get(position);
         int variableId = map.get(object.getClass()).variableId;
         holder.itemView.setVariable(variableId,object);//数据绑定
-
     }
 
     @Override
