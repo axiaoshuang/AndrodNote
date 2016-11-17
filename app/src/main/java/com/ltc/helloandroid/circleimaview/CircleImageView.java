@@ -2,21 +2,14 @@ package com.ltc.helloandroid.circleimaview;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapShader;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
-import android.graphics.Shader;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
-import android.support.annotation.DrawableRes;
 import android.util.AttributeSet;
-import android.widget.CheckedTextView;
 import android.widget.ImageView;
 
 /**

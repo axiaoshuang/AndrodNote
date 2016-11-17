@@ -6,8 +6,6 @@ import android.databinding.BindingAdapter;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.databinding.library.baseAdapters.BR;
 import com.bumptech.glide.Glide;
