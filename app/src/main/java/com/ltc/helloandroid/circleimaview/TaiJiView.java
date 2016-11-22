@@ -10,7 +10,7 @@ import android.util.AttributeSet;
 import android.view.View;
 
 /**
- * Created by litiancheng on 2016/11/17.
+ * Created by ltc on 2016/11/17.
  */
 
 public class TaiJiView extends View {
@@ -19,7 +19,6 @@ public class TaiJiView extends View {
     private Paint mBlackPaint;
     private int width;
     private int height;
-    private boolean firstStart;
     private boolean isVisible=true;
     private int mMin;
     private int mRadius;
@@ -68,8 +67,7 @@ public class TaiJiView extends View {
         //绘制太极两个点
         canvas.drawCircle(0,-smallRadius,mRadius/8,mBlackPaint);
         canvas.drawCircle(0,smallRadius,mRadius/8,mWhitePaint);
-        if (!firstStart)
-        startRotate();
+
     }
     float rotate;
     private void startRotate() {
@@ -77,7 +75,6 @@ public class TaiJiView extends View {
             @Override
             public void run() {
                 if (isVisible) {
-                    firstStart = true;
                     rotate += 5;
                     invalidate();
                     startRotate();
@@ -100,8 +97,10 @@ public class TaiJiView extends View {
     @Override
     protected void onWindowVisibilityChanged(int visibility) {
         super.onWindowVisibilityChanged(visibility);
-        if (visibility==VISIBLE)
-            isVisible=true;
+        if (visibility==VISIBLE) {
+            isVisible = true;
+            startRotate();
+        }
         else
             isVisible=false;
     }
