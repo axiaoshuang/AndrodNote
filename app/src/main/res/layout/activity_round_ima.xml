@@ -21,7 +21,7 @@
     <com.ltc.helloandroid.circleimaview.TaiJiView
         android:layout_width="200dp"
         android:layout_height="200dp"/>
-    <com.ltc.helloandroid.circleimaview.TestView
+    <com.ltc.helloandroid.circleimaview.PieChartView
         android:layout_width="200dp"
         android:layout_height="200dp"/>
 </LinearLayout>

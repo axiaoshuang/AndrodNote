@@ -32,11 +32,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    @OnClick(R.id.data_binding)
-    public void onClick() {
-        Intent intent = new Intent(this, DataBindingActivity.class);
-        startActivity(intent);
-    }
 
     @OnClick({R.id.data_binding, R.id.circle_ima})
     public void onClick(View view) {

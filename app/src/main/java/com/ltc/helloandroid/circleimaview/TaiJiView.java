@@ -54,7 +54,6 @@ public class TaiJiView extends View {
     protected void onDraw(Canvas canvas) {
         //画布移到圆心
         canvas.translate(mMin/2,mMin/2);
-        canvas.drawColor(Color.YELLOW);
         canvas.rotate(rotate);
 
 
