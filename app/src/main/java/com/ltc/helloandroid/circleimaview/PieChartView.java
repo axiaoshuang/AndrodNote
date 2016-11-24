@@ -62,9 +62,7 @@ public class PieChartView extends View {
         mRandom = new Random();
         //存放数据类
         mPieChartDatas = new ArrayList<>();
-        mPieChartDatas.add(new PieChartData(0, "淘宝", 40));
-        mPieChartDatas.add(new PieChartData(0, "京东", 10));
-        mPieChartDatas.add(new PieChartData(0, "其他", 50));
+
     }
 
     @Override
@@ -138,7 +136,7 @@ public class PieChartView extends View {
     }
 
     //数据类
-    public class PieChartData {
+    public static class PieChartData {
         private int color;//颜色
         private String typeName;//名字
         private float percent;//百分比
