@@ -88,11 +88,11 @@ public class PieChartView extends View {
                 canvas.drawArc(mRectF, currentAngle, pieChartData.angle, true, mPaint);
                 float angle = currentAngle + pieChartData.angle / 2;
                 float pxs = (float) (radius*Math.cos(Math.toRadians(angle)));
-                float textX= (float) (radius/2*Math.cos(Math.toRadians(angle)));
-                float textY = (float) (radius/2*Math.sin(Math.toRadians(angle)));
                 float pys = (float) (radius*Math.sin(Math.toRadians(angle)));
                 float pxt = (float) ((radius+radius/10f)*Math.cos(Math.toRadians(angle)));
                 float pyt = (float) ((radius+radius/10f)*Math.sin(Math.toRadians(angle)));
+                float textX= (float) (radius/2*Math.cos(Math.toRadians(angle)));
+                float textY = (float) (radius/2*Math.sin(Math.toRadians(angle)));
 
                 canvas.drawLine(pxs,pys,pxt,pyt,mLinePaint);
 
