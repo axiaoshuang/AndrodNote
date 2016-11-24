@@ -30,12 +30,12 @@ public class DataBindingActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         ArrayList users = new ArrayList<>();
         for (int i = 0; i < 20; i++) {
-            users.add(new User("ltc", "我是内容", "https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo_top_ca79a146.png"));
-            users.add(new User2("item2", "我是内容", "https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo_top_ca79a146.png"));
+            users.add(new User("ltc", "我是内容", "http://cdn.duitang.com/uploads/item/201608/22/20160822233035_HfCuJ.jpeg"));
+            users.add(new User2("item2", "我是内容", "http://cdn.duitang.com/uploads/item/201608/22/20160822233035_HfCuJ.jpeg"));
 
         }
 
-        User user = new User("ltc", "我是ltc", "https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo_top_ca79a146.png");
+        User user = new User("ltc", "我是ltc", "http://cdn.duitang.com/uploads/item/201608/22/20160822233035_HfCuJ.jpeg");
         binding.setUser(user);
 
         HashMap<Type, DBAdapter.BindingData> map = new HashMap<>();

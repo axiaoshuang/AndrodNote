@@ -29,6 +29,7 @@ public class PieChartView extends View {
     private int mMin;
     private Paint mLinePaint;
     private Paint mTextPaint;
+    float radius;
 
     public PieChartView(Context context) {
         this(context, null);
@@ -61,22 +62,21 @@ public class PieChartView extends View {
         mRandom = new Random();
         //存放数据类
         mPieChartDatas = new ArrayList<>();
-        mPieChartDatas.add(new PieChartData(0, "淘宝", 20));
+        mPieChartDatas.add(new PieChartData(0, "淘宝", 30));
         mPieChartDatas.add(new PieChartData(0, "京东", 10));
         mPieChartDatas.add(new PieChartData(0, "其他", 60));
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
-        float radius=mMin/2*0.8f;
         //将画笔移到中心
-        canvas.translate(getWidth()/2, getHeight()/2);
+        canvas.translate(getWidth() / 2, getHeight() / 2);
         //讲数据遍历出来绘制扇形
         int currentAngle = 0;
         if (mPieChartDatas != null && mPieChartDatas.size() > 0) {
             for (PieChartData pieChartData : mPieChartDatas) {
-                if(currentAngle>360)
-                  throw  new RuntimeException("do not exceed 100 percent");
+                if (currentAngle + pieChartData.angle > 360)
+                    throw new RuntimeException("do not exceed 100 percent");
 
                 int color = pieChartData.getColor();
                 //如果没有颜色的话 随机生成颜色
@@ -87,29 +87,31 @@ public class PieChartView extends View {
                 //绘制扇形
                 canvas.drawArc(mRectF, currentAngle, pieChartData.angle, true, mPaint);
                 float angle = currentAngle + pieChartData.angle / 2;
-                float pxs = (float) (radius*Math.cos(Math.toRadians(angle)));
-                float pys = (float) (radius*Math.sin(Math.toRadians(angle)));
-                float pxt = (float) ((radius+radius/10f)*Math.cos(Math.toRadians(angle)));
-                float pyt = (float) ((radius+radius/10f)*Math.sin(Math.toRadians(angle)));
-                float textX= (float) (radius/2*Math.cos(Math.toRadians(angle)));
-                float textY = (float) (radius/2*Math.sin(Math.toRadians(angle)));
+                float pxs = (float) (radius * Math.cos(Math.toRadians(angle)));
+                float pys = (float) (radius * Math.sin(Math.toRadians(angle)));
+                float pxt = (float) ((radius + radius / 10f) * Math.cos(Math.toRadians(angle)));
+                float pyt = (float) ((radius + radius / 10f) * Math.sin(Math.toRadians(angle)));
+                float textX = (float) (radius / 2 * Math.cos(Math.toRadians(angle)));
+                float textY = (float) (radius / 2 * Math.sin(Math.toRadians(angle)));
 
-                canvas.drawLine(pxs,pys,pxt,pyt,mLinePaint);
+                canvas.drawLine(pxs, pys, pxt, pyt, mLinePaint);
 
-                canvas.drawText(pieChartData.getTypeName(),textX-mTextPaint.measureText(pieChartData.getTypeName())/2,textY+mTextPaint.getTextSize(),mTextPaint);
+                canvas.drawText(pieChartData.getTypeName(), textX - mTextPaint.measureText(pieChartData.getTypeName()) / 2, textY + mTextPaint.getTextSize(), mTextPaint);
                 //绘制文字canvas.drawText();
                 String format = String.format(Locale.getDefault(), "%.2f%%", pieChartData.getPrecent());
-                if (!(currentAngle>=90&&currentAngle<=270))
-                canvas.drawText(format,pxt-mTextPaint.measureText(format)/2,pyt+mTextPaint.getTextSize(),mTextPaint);
-                else
-                canvas.drawText(format,pxt-mTextPaint.measureText(format)/2,pyt,mTextPaint);
+
 
                 currentAngle += pieChartData.angle;
+                if (currentAngle >= 0 && currentAngle <= 180)
+                    canvas.drawText(format, pxt - mTextPaint.measureText(format) / 2, pyt + mTextPaint.getTextSize(), mTextPaint);
+
+                else
+                    canvas.drawText(format, pxt - mTextPaint.measureText(format) / 2, pyt, mTextPaint);
 
 
             }
         }
-        canvas.drawCircle(0,0,radius,mLinePaint);
+        canvas.drawCircle(0, 0, radius, mLinePaint);
 
 
     }
@@ -119,7 +121,7 @@ public class PieChartView extends View {
         invalidate();
     }
 
-    public void addPieChartDatas(@NonNull  List<PieChartData> pieChartDatas) {
+    public void addPieChartDatas(@NonNull List<PieChartData> pieChartDatas) {
         mPieChartDatas.addAll(pieChartDatas);
         invalidate();
     }
@@ -129,7 +131,8 @@ public class PieChartView extends View {
         super.onSizeChanged(w, h, oldw, oldh);
         mMin = Math.min(getWidth(), getHeight());
 
-        mRectF = new RectF(-mMin / 2*0.8f,-mMin / 2*0.8f,mMin / 2*0.8f,mMin / 2*0.8f);
+        radius = mMin / 2 * 0.8f;
+        mRectF = new RectF(-radius, -radius, radius, radius);
     }
 
     //数据类
