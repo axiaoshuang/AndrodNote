@@ -57,14 +57,14 @@ public class PieChartView extends View {
 
         mTextPaint = new Paint();
         mTextPaint.setAntiAlias(true);
-        mTextPaint.setTextSize(18);
+        mTextPaint.setTextSize(16);
 
         mRandom = new Random();
         //存放数据类
         mPieChartDatas = new ArrayList<>();
-        mPieChartDatas.add(new PieChartData(0, "淘宝", 30));
+        mPieChartDatas.add(new PieChartData(0, "淘宝", 40));
         mPieChartDatas.add(new PieChartData(0, "京东", 10));
-        mPieChartDatas.add(new PieChartData(0, "其他", 60));
+        mPieChartDatas.add(new PieChartData(0, "其他", 50));
     }
 
     @Override
@@ -104,6 +104,8 @@ public class PieChartView extends View {
                 currentAngle += pieChartData.angle;
                 if (currentAngle >= 0 && currentAngle <= 180)
                     canvas.drawText(format, pxt - mTextPaint.measureText(format) / 2, pyt + mTextPaint.getTextSize(), mTextPaint);
+                else  if (currentAngle>180&&currentAngle-pieChartData.angle/2==180)
+                    canvas.drawText(format, pxt - mTextPaint.measureText(format) , pyt+mTextPaint.getTextSize()/2 , mTextPaint);
 
                 else
                     canvas.drawText(format, pxt - mTextPaint.measureText(format) / 2, pyt, mTextPaint);
@@ -131,7 +133,7 @@ public class PieChartView extends View {
         super.onSizeChanged(w, h, oldw, oldh);
         mMin = Math.min(getWidth(), getHeight());
 
-        radius = mMin / 2 * 0.8f;
+        radius = mMin / 2 * 0.6f;
         mRectF = new RectF(-radius, -radius, radius, radius);
     }
 
