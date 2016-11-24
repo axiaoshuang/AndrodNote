@@ -75,12 +75,14 @@ public class PieChartView extends View {
         int currentAngle = 0;
         if (mPieChartDatas != null && mPieChartDatas.size() > 0) {
             for (PieChartData pieChartData : mPieChartDatas) {
+                if(currentAngle>360)
+                  throw  new RuntimeException("do not exceed 100 percent");
+
                 int color = pieChartData.getColor();
                 //如果没有颜色的话 随机生成颜色
                 if (color == 0) {
                     color = Color.rgb(mRandom.nextInt(257), mRandom.nextInt(257), mRandom.nextInt(257));
                 }
-                Log.i("onDraw", "onDraw: "+color);
                 mPaint.setColor(color);
                 //绘制扇形
                 canvas.drawArc(mRectF, currentAngle, pieChartData.angle, true, mPaint);
