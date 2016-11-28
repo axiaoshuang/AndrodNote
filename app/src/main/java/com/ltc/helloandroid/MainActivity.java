@@ -8,7 +8,6 @@ import android.widget.Button;
 
 import com.ltc.helloandroid.circleimaview.RoundImaActivity;
 import com.ltc.helloandroid.databinding.DataBindingActivity;
-import com.ltc.helloandroid.mobilevision.MobileVisionActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -22,8 +21,6 @@ public class MainActivity extends AppCompatActivity {
     Button mDataBinding;
     @Bind(R.id.circle_ima)
     Button mCircleIma;
-    @Bind(R.id.mobile_vision)
-    Button mMobileVision;
 
 
     @Override
@@ -48,9 +45,7 @@ public class MainActivity extends AppCompatActivity {
             case R.id.circle_ima:
                 intent = new Intent(this, RoundImaActivity.class);
                 break;
-            case R.id.mobile_vision:
-                intent=new Intent(this, MobileVisionActivity.class);
-                break;
+
         }
         startActivity(intent);
 
