@@ -23,8 +23,8 @@ public class RoundImaActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         List<PieChartView.PieChartData> pieChartDatas = new ArrayList<>();
         pieChartDatas.add(new PieChartView.PieChartData(0, "淘宝", 40));
-        pieChartDatas.add(new PieChartView.PieChartData(0, "京东", 10));
-        pieChartDatas.add(new PieChartView.PieChartData(0, "其他", 50));
+        pieChartDatas.add(new PieChartView.PieChartData(0, "京东", 20));
+        pieChartDatas.add(new PieChartView.PieChartData(0, "其他", 40));
         mPieChart.addPieChartDatas(pieChartDatas);
 
     }

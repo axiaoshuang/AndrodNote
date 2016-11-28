@@ -20,6 +20,13 @@
         <activity android:name=".databinding.DataBindingActivity"/>
         <activity android:name=".circleimaview.RoundImaActivity">
         </activity>
+
+        <meta-data
+            android:name="com.google.android.gms.vision.DEPENDENCIES"
+            android:value="face"/>
+
+        <activity android:name=".mobilevision.MobileVisionActivity">
+        </activity>
     </application>
 
 </manifest>

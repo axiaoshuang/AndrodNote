@@ -1,6 +1,7 @@
 package com.ltc.helloandroid.circleimaview;
 
 import android.content.Context;
+import android.databinding.generated.callback.OnClickListener;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -9,6 +10,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 
 import java.util.ArrayList;
@@ -29,8 +31,11 @@ public class PieChartView extends View {
     private int mMin;
     private Paint mLinePaint;
     private Paint mTextPaint;
-    float radius;
+    private float radius;
 
+
+
+    private PieChartItemListener mPieChartItemListener;
     public PieChartView(Context context) {
         this(context, null);
     }
@@ -104,7 +109,8 @@ public class PieChartView extends View {
                     canvas.drawText(format, pxt - mTextPaint.measureText(format) / 2, pyt + mTextPaint.getTextSize(), mTextPaint);
                 else  if (currentAngle>180&&currentAngle-pieChartData.angle/2==180)
                     canvas.drawText(format, pxt - mTextPaint.measureText(format) , pyt+mTextPaint.getTextSize()/2 , mTextPaint);
-
+                else if(currentAngle>270&&currentAngle<=360&&currentAngle-pieChartData.angle>270)
+                    canvas.drawText(format, pxt  , pyt , mTextPaint);
                 else
                     canvas.drawText(format, pxt - mTextPaint.measureText(format) / 2, pyt, mTextPaint);
 
@@ -135,6 +141,34 @@ public class PieChartView extends View {
         mRectF = new RectF(-radius, -radius, radius, radius);
     }
 
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        switch (event.getAction()){
+            case MotionEvent.ACTION_UP:
+                float x = event.getX()-mMin/2;
+                float y = event.getY()-mMin/2;
+                int startAngle=0;
+                for (PieChartData pieChartData : mPieChartDatas) {
+                    float angle = pieChartData.angle;
+
+                    // TODO: 2016/11/25 根据角度算出点击在哪里
+                    startAngle+=angle;
+                }
+
+                break;
+
+
+        }
+        return super.onTouchEvent(event);
+    }
+
+    public PieChartItemListener getPieChartItemListener() {
+        return mPieChartItemListener;
+    }
+
+    public void setPieChartItemListener(PieChartItemListener pieChartItemListener) {
+        mPieChartItemListener = pieChartItemListener;
+    }
     //数据类
     public static class PieChartData {
         private int color;//颜色
@@ -179,5 +213,8 @@ public class PieChartView extends View {
         }
     }
 
+    public  interface PieChartItemListener {
+              void onPieChartItemClick(PieChartData data);
 
+    }
 }
