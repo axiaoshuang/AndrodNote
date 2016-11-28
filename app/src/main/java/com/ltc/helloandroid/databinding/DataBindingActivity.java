@@ -13,6 +13,7 @@ import com.ltc.helloandroid.R;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -21,19 +22,15 @@ public class DataBindingActivity extends AppCompatActivity {
 
     @Bind(R.id.db_rv)
     RecyclerView mDbRv;
-    private String TAG = "DataBindingActivity";
+    private static  final String TAG = "DataBindingActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         DBTestBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_data_binding);
         ButterKnife.bind(this);
-        ArrayList users = new ArrayList<>();
-        for (int i = 0; i < 20; i++) {
-            users.add(new User("ltc", "我是内容", "http://cdn.duitang.com/uploads/item/201608/22/20160822233035_HfCuJ.jpeg"));
-            users.add(new User2("item2", "我是内容", "http://cdn.duitang.com/uploads/item/201608/22/20160822233035_HfCuJ.jpeg"));
-
-        }
+        ArrayList<Object> users = new ArrayList<Object>();
+        addData(users);
 
         User user = new User("ltc", "我是ltc", "http://cdn.duitang.com/uploads/item/201608/22/20160822233035_HfCuJ.jpeg");
         binding.setUser(user);
@@ -45,5 +42,12 @@ public class DataBindingActivity extends AppCompatActivity {
         mDbRv.setAdapter(new DBAdapter(this, map, users));
 
 
+    }
+
+    private void addData(ArrayList<Object> users) {
+        for (int i = 0; i < 20; i++) {
+            users.add(new User("ltc", "我是内容", "http://cdn.duitang.com/uploads/item/201608/22/20160822233035_HfCuJ.jpeg"));
+            users.add(new User2("item2", "我是内容", "http://cdn.duitang.com/uploads/item/201608/22/20160822233035_HfCuJ.jpeg"));
+        }
     }
 }
