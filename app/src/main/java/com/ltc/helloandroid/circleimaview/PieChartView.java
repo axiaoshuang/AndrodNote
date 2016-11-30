@@ -34,8 +34,8 @@ public class PieChartView extends View {
     private float radius;
 
 
-
     private PieChartItemListener mPieChartItemListener;
+
     public PieChartView(Context context) {
         this(context, null);
     }
@@ -107,10 +107,10 @@ public class PieChartView extends View {
                 currentAngle += pieChartData.angle;
                 if (currentAngle >= 0 && currentAngle <= 180)
                     canvas.drawText(format, pxt - mTextPaint.measureText(format) / 2, pyt + mTextPaint.getTextSize(), mTextPaint);
-                else  if (currentAngle>180&&currentAngle-pieChartData.angle/2==180)
-                    canvas.drawText(format, pxt - mTextPaint.measureText(format) , pyt+mTextPaint.getTextSize()/2 , mTextPaint);
-                else if(currentAngle>270&&currentAngle<=360&&currentAngle-pieChartData.angle>270)
-                    canvas.drawText(format, pxt  , pyt , mTextPaint);
+                else if (currentAngle > 180 && currentAngle - pieChartData.angle / 2 == 180)
+                    canvas.drawText(format, pxt - mTextPaint.measureText(format), pyt + mTextPaint.getTextSize() / 2, mTextPaint);
+                else if (currentAngle > 270 && currentAngle <= 360 && currentAngle - pieChartData.angle > 270)
+                    canvas.drawText(format, pxt, pyt, mTextPaint);
                 else
                     canvas.drawText(format, pxt - mTextPaint.measureText(format) / 2, pyt, mTextPaint);
 
@@ -143,16 +143,34 @@ public class PieChartView extends View {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        switch (event.getAction()){
-            case MotionEvent.ACTION_UP:
-                float x = event.getX()-mMin/2;
-                float y = event.getY()-mMin/2;
-                int startAngle=0;
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                float x = event.getX() - mMin / 2;
+                float y = event.getY() - mMin / 2;
+                double touchAngle = Math.toDegrees(Math.atan(y / x));
+
+                if (x < 0 && y < 0) {  //2 象限
+                    touchAngle += 180.0;
+                } else if (y < 0 && x > 0) {  //1象限
+                    touchAngle += 360.0;
+                } else if (y > 0 && x < 0) {  //3象限
+                    touchAngle += 180;
+                }
+
+                int currentAngle = 0;
+
                 for (PieChartData pieChartData : mPieChartDatas) {
                     float angle = pieChartData.angle;
 
-                    // TODO: 2016/11/25 根据角度算出点击在哪里
-                    startAngle+=angle;
+
+                    currentAngle += angle;
+                    if (currentAngle == angle && touchAngle < angle) {
+                        if (mPieChartItemListener != null)
+                            mPieChartItemListener.onPieChartItemClick(pieChartData);
+                    } else if (touchAngle > angle && touchAngle < currentAngle) {
+                        if (mPieChartItemListener != null)
+                            mPieChartItemListener.onPieChartItemClick(pieChartData);
+                    }
                 }
 
                 break;
@@ -162,13 +180,11 @@ public class PieChartView extends View {
         return super.onTouchEvent(event);
     }
 
-    public PieChartItemListener getPieChartItemListener() {
-        return mPieChartItemListener;
-    }
 
     public void setPieChartItemListener(PieChartItemListener pieChartItemListener) {
         mPieChartItemListener = pieChartItemListener;
     }
+
     //数据类
     public static class PieChartData {
         private int color;//颜色
@@ -213,8 +229,8 @@ public class PieChartView extends View {
         }
     }
 
-    public  interface PieChartItemListener {
-              void onPieChartItemClick(PieChartData data);
+    public interface PieChartItemListener {
+        void onPieChartItemClick(PieChartData data);
 
     }
 }

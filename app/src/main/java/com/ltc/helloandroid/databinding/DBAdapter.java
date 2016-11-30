@@ -15,18 +15,17 @@ import java.util.List;
 
 /**
  * Created by ltc on 2016/11/10.
- *
  */
 
-public class DBAdapter extends RecyclerView.Adapter <DBAdapter.DBViewHolder>{
+public class DBAdapter extends RecyclerView.Adapter<DBAdapter.DBViewHolder> {
     private final List list;//数据源
     private final Context context;
-    private final HashMap<Type,BindingData> map;//存放viewmodel类型 和对应的id
+    private final HashMap<Type, BindingData> map;//存放viewmodel类型 和对应的id
 
-    public DBAdapter(Context context, HashMap<Type,BindingData> map, List list) {
-        this.context=context;
-        this.map=map;
-        this.list=list;
+    public DBAdapter(Context context, HashMap<Type, BindingData> map, List list) {
+        this.context = context;
+        this.map = map;
+        this.list = list;
     }
 
     @Override
@@ -39,13 +38,14 @@ public class DBAdapter extends RecyclerView.Adapter <DBAdapter.DBViewHolder>{
     public void onBindViewHolder(DBAdapter.DBViewHolder holder, int position) {
         Object object = list.get(position);
         int variableId = map.get(object.getClass()).variableId;
-        holder.itemView.setVariable(variableId,object);//数据绑定
+        holder.itemView.setVariable(variableId, object);//数据绑定
     }
 
     @Override
     public int getItemCount() {
         return list.size();
     }
+
     @Override
     public int getItemViewType(int position) {
         //把layoutId当做viewType
@@ -53,17 +53,18 @@ public class DBAdapter extends RecyclerView.Adapter <DBAdapter.DBViewHolder>{
     }
 
 
-    public   class  DBViewHolder extends RecyclerView.ViewHolder{
-        private  ViewDataBinding itemView;
+    public class DBViewHolder extends RecyclerView.ViewHolder {
+        private ViewDataBinding itemView;
+
         public DBViewHolder(ViewDataBinding itemView) {
             super(itemView.getRoot());
-            this.itemView=itemView;
+            this.itemView = itemView;
         }
     }
 
 
-    public static  class  BindingData{
-        private  int  layoutId;
+    public static class BindingData {
+        private int layoutId;
         private int variableId;
 
         public BindingData(int layoutId, int variableId) {

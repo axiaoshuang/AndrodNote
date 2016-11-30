@@ -2,6 +2,7 @@ package com.ltc.helloandroid.circleimaview;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
 
 import com.ltc.helloandroid.R;
 
@@ -26,6 +27,12 @@ public class RoundImaActivity extends AppCompatActivity {
         pieChartDatas.add(new PieChartView.PieChartData(0, "京东", 20));
         pieChartDatas.add(new PieChartView.PieChartData(0, "其他", 40));
         mPieChart.addPieChartDatas(pieChartDatas);
+        mPieChart.setPieChartItemListener(new PieChartView.PieChartItemListener() {
+            @Override
+            public void onPieChartItemClick(PieChartView.PieChartData data) {
+                Toast.makeText(RoundImaActivity.this, data.getTypeName(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 }
