@@ -28,10 +28,5 @@
         android:text="CircleImaView"
         />
 
-    <Button
-        android:id="@+id/mobile_vision"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Mobile Vision"
-        />
+
 </com.google.android.flexbox.FlexboxLayout>

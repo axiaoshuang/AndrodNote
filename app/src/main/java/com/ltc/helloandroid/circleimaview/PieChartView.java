@@ -160,15 +160,15 @@ public class PieChartView extends View {
                 int currentAngle = 0;
 
                 for (PieChartData pieChartData : mPieChartDatas) {
+                    if (mPieChartItemListener == null)
+                        break;
                     float angle = pieChartData.angle;
                     currentAngle += angle;
                     if (currentAngle == angle && touchAngle < angle) {
-                        if (mPieChartItemListener != null)
-                            mPieChartItemListener.onPieChartItemClick(pieChartData);
+                        mPieChartItemListener.onPieChartItemClick(pieChartData);
                         break;
                     } else if (touchAngle > angle && touchAngle < currentAngle) {
-                        if (mPieChartItemListener != null)
-                            mPieChartItemListener.onPieChartItemClick(pieChartData);
+                        mPieChartItemListener.onPieChartItemClick(pieChartData);
                         break;
                     }
                 }

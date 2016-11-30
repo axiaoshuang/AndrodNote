@@ -28,12 +28,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-
-
     }
-
-
-
 
     @OnClick({R.id.data_binding, R.id.circle_ima, R.id.mobile_vision})
     public void onClick(View view) {
@@ -45,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
             case R.id.circle_ima:
                 intent = new Intent(this, RoundImaActivity.class);
                 break;
-
         }
         startActivity(intent);
 
