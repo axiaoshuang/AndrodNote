@@ -2,6 +2,10 @@ package com.ltc.helloandroid.circleimaview;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.ltc.helloandroid.R;
@@ -16,7 +20,8 @@ public class RoundImaActivity extends AppCompatActivity {
 
     @Bind(R.id.pie_chart)
     PieChartView mPieChart;
-
+    @Bind(R.id.activity_round_ima)
+    ImageView mActivityRoundIma;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,5 +39,7 @@ public class RoundImaActivity extends AppCompatActivity {
             }
         });
 
+
     }
+
 }

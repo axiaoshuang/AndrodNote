@@ -2,6 +2,7 @@ package com.ltc.helloandroid.databinding;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -30,16 +31,22 @@ public class DataBindingActivity extends AppCompatActivity {
         DBTestBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_data_binding);
         ButterKnife.bind(this);
         ArrayList<Object> users = new ArrayList<Object>();
-        addData(users);
+
 
         User user = new User("ltc", "我是ltc", "http://cdn.duitang.com/uploads/item/201608/22/20160822233035_HfCuJ.jpeg");
         binding.setUser(user);
 
         HashMap<Type, DBAdapter.BindingData> map = new HashMap<>();
+
+        DBAdapter adapter = new DBAdapter(this, map, users);
+        mDbRv.setAdapter(adapter);
+        mDbRv.smoothScrollToPosition(10);
+        addData(users);
         map.put(User.class, new DBAdapter.BindingData(R.layout.db_recycler_item, BR.user));
         map.put(User2.class, new DBAdapter.BindingData(R.layout.db_recycler_item2, BR.user2));
         Log.i(TAG, "onCreate: " + users.size());
-        mDbRv.setAdapter(new DBAdapter(this, map, users));
+       // adapter.notifyDataSetChanged();
+
 
 
     }

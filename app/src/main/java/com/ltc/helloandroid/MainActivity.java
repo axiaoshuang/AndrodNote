@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
     }
 
-    @OnClick({R.id.data_binding, R.id.circle_ima, R.id.mobile_vision})
+    @OnClick({R.id.data_binding, R.id.circle_ima})
     public void onClick(View view) {
         Intent intent = null;
         switch (view.getId()) {
