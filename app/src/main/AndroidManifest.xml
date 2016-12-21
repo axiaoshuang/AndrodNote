@@ -10,7 +10,10 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:launchMode="singleTask"
+            >
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -21,11 +24,8 @@
         <activity android:name=".circleimaview.RoundImaActivity">
         </activity>
 
-        <meta-data
-            android:name="com.google.android.gms.vision.DEPENDENCIES"
-            android:value="face"/>
 
-        <activity android:name=".mobilevision.MobileVisionActivity">
+        <activity android:name=".rxjava2.Rxjava2Activity">
         </activity>
     </application>
 

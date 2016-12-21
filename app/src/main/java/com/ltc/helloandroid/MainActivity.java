@@ -2,12 +2,19 @@ package com.ltc.helloandroid;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.util.Xml;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.ltc.helloandroid.circleimaview.RoundImaActivity;
 import com.ltc.helloandroid.databinding.DataBindingActivity;
+import com.ltc.helloandroid.rxjava2.Rxjava2Activity;
+
+import org.xmlpull.v1.XmlPullParser;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -30,7 +37,18 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
     }
 
-    @OnClick({R.id.data_binding, R.id.circle_ima})
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+        super.onSaveInstanceState(outState, outPersistentState);
+    }
+
+    @OnClick({R.id.data_binding, R.id.circle_ima,R.id.rxjava_2})
     public void onClick(View view) {
         Intent intent = null;
         switch (view.getId()) {
@@ -39,6 +57,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.circle_ima:
                 intent = new Intent(this, RoundImaActivity.class);
+                break;
+            case R.id.rxjava_2:
+                intent=new Intent(this, Rxjava2Activity.class);
                 break;
         }
         startActivity(intent);
