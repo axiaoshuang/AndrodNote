@@ -55,6 +55,8 @@ buffer操作符在突发期间你可以得到的想要的，并在缓冲区收�
                     }
                 });
 ```
+如上代码可以造成生产者大于消费者的情况,我们可以使用BackpressureStrategy模式去解决他. 
+
 BackpressureStrategy一共分为五种情况 MISSING ERROR BUFFER DROP LATEST  
 
 MISSING:当过度生产的observable时MISSING则会向subscrber抛出MissingBackpressureException异常并将后面数据全部丢弃 如上代码当为MISSING模式时运行结果如下:
@@ -105,6 +107,7 @@ LATEST结果:
 12-21 18:28:22.189 15895-16194/com.ltc.helloandroid D/JG: 9999
 
 ```
+
 
 
 
