@@ -37,39 +37,28 @@ public class Rxjava2Activity extends AppCompatActivity {
     private static final String TAG = "Rxjava2Activity";
     @Bind(R.id.activity_rxjava2)
     LinearLayout mActivityRxjava2;
-    private Disposable mAccept;
+    private CompositeDisposable mCompositeDisposable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rxjava2);
-        CompositeDisposable compositeDisposable = new CompositeDisposable();
+        mCompositeDisposable = new CompositeDisposable();
         ButterKnife.bind(this);
-        Flowable.create(new FlowableOnSubscribe<Integer>() {
+        Disposable subscribe = Flowable.create((FlowableOnSubscribe<Integer>) e -> {
 
-            @Override
-            public void subscribe(FlowableEmitter<Integer> e) throws Exception {
-
-                for(int i=0;i<10000;i++){
-                    e.onNext(i);
-                }
-                e.onComplete();
+            for (int i = 0; i < 10000; i++) {
+                e.onNext(i);
             }
+            e.onComplete();
         }, BackpressureStrategy.DROP) //指定背压处理策略，抛出异常
                 .subscribeOn(Schedulers.computation())
                 .observeOn(Schedulers.newThread())
-                .subscribe(new Consumer<Integer>() {
-                    @Override
-                    public void accept(Integer integer) throws Exception {
-                        Log.d("JG", integer.toString());
-                        Thread.sleep(100);
-                    }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable throwable) throws Exception {
-                        Log.d("JG",throwable.toString());
-                    }
-                });
+                .subscribe(integer -> {
+                    Log.d("JG", integer.toString());
+                    Thread.sleep(100);
+                }, throwable -> Log.d("JG", throwable.toString()));
+            mCompositeDisposable.add(subscribe);
 //        Flowable.create(new FlowableOnSubscribe<Long>() {
 //            @Override
 //            public void subscribe(final FlowableEmitter<Long> e) throws Exception {
@@ -165,6 +154,6 @@ public class Rxjava2Activity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mAccept.dispose();
+        mCompositeDisposable.clear();
     }
 }

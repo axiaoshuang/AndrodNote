@@ -1,6 +1,7 @@
 #Rxjava2
 ##Rxjava1 和 Rxjava2区别
-Rxjava1所有的Observable都具有背压概念 但是有时我们并不需要这个功能 所以Rxjava2讲背压策略单独的抽取出Flowable类 不需要背压策略的则使用Observable类。
+他们最大的不同在于Rxjava1所有的Observable都具有背压概念 但是有时我们并不需要这个功能 所以Rxjava2将背压策略单独的抽取出Flowable类 不需要背压策略的则使用Observable类。现在Rxjava2的Action可以抛出异常了 也就是说在onNext中出错的代码并不会走入onError 而是直接对外抛出。
+另外就是rxjava2对api做了一些调整 见下文。
 ###背压(Backpressure)
 在rxjava中会经常遇到一种情况就是被观察者发送消息太快以至于它的操作符或者订阅者不能及时处理相关的消息。那么随之而来的就是如何处理这些未处理的消息。
 
@@ -19,7 +20,7 @@ buffer操作符在突发期间你可以得到的想要的，并在缓冲区收�
 
 
 #####2.阻塞
-因为Android很多情况刷新ui在主线程所以这个方案不予考虑
+因为Android很多情况刷新ui在主线程会造成主线程阻塞所以这个方案不予考虑
 
 #####3.背压
 当subscribe订阅observable的时候可以通过调用subscribe.request（n），n是你想要的observable发送出来的量。
@@ -66,7 +67,7 @@ MISSING:当过度生产的observable时MISSING则会向subscrber抛出MissingBac
 
 12-21 18:01:59.999 3376-3560/com.ltc.helloandroid D/JG: io.reactivex.exceptions.MissingBackpressureException: Queue is full?!
 ```
-ERROR:和MISSING类似但是onNext不会被调用一次 结果：
+ERROR:和MISSING类似但是只要出现错误 onNext不会被调用 而MISSING会保留之前发射的数据 结果：
 
 ```
 12-21 18:06:38.438 11098-11481/com.ltc.helloandroid D/JG: io.reactivex.exceptions.MissingBackpressureException: create: could not emit value due to lack of requests
@@ -107,6 +108,7 @@ LATEST结果:
 12-21 18:28:22.189 15895-16194/com.ltc.helloandroid D/JG: 9999
 
 ```
+
 
 
 
