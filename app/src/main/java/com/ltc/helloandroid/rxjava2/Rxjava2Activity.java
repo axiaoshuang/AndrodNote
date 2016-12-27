@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.webkit.JavascriptInterface;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -26,6 +27,7 @@ import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.Observer;
+import io.reactivex.Scheduler;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
@@ -45,110 +47,89 @@ public class Rxjava2Activity extends AppCompatActivity {
         setContentView(R.layout.activity_rxjava2);
         mCompositeDisposable = new CompositeDisposable();
         ButterKnife.bind(this);
-        Disposable subscribe = Flowable.create((FlowableOnSubscribe<Integer>) e -> {
+//        //支持背压
+         Flowable.create((FlowableOnSubscribe<Integer>) e -> {
 
-            for (int i = 0; i < 10000; i++) {
+            for (int i = 0; i < 127; i++) {
                 e.onNext(i);
             }
             e.onComplete();
-        }, BackpressureStrategy.DROP) //指定背压处理策略，抛出异常
+        }, BackpressureStrategy.ERROR) //指定背压处理策略，抛出异常
                 .subscribeOn(Schedulers.computation())
                 .observeOn(Schedulers.newThread())
-                .subscribe(integer -> {
-                    Log.d("JG", integer.toString());
-                    Thread.sleep(100);
-                }, throwable -> Log.d("JG", throwable.toString()));
-            mCompositeDisposable.add(subscribe);
-//        Flowable.create(new FlowableOnSubscribe<Long>() {
+                .subscribe(new Subscriber<Integer>() {
+                    @Override
+                    public void onSubscribe(Subscription s) {
+                            s.request(0);
+                    }
+
+                    @Override
+                    public void onNext(Integer integer) {
+                        Log.i(TAG, "onNext: "+integer);
+                        try {
+                            Thread.sleep(100);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        Log.i(TAG, "onError: "+t.toString());
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+//                .subscribe(integer -> {
+//                    Log.d("JG", integer.toString());
+//                    Thread.sleep(100);
+//                }, throwable -> Log.d("JG", throwable.toString()));
+
+         //   mCompositeDisposable.add(subscribe);
+
+        //不支持背压
+//        Observable.create(new ObservableOnSubscribe<String>() {
 //            @Override
-//            public void subscribe(final FlowableEmitter<Long> e) throws Exception {
-//                Observable.interval(10, TimeUnit.MILLISECONDS)
-//                        .take(Integer.MAX_VALUE)
-//                        .subscribe(new Consumer<Long>() {
-//                            @Override
-//                            public void accept(Long aLong) throws Exception {
-//
-//                                e.onNext(aLong);
-//
-//                            }
-//                        });
+//            public void subscribe(ObservableEmitter<String> e) throws Exception {
+//                for (int i = 0; i < 1000; i++) {
+//                    e.onNext(String.valueOf(i));
+//                }
+//                e.onComplete();
 //            }
-//        }, BackpressureStrategy.DROP)
-//                .subscribe(new Subscriber<Long>() {
-//                    @Override
-//                    public void onSubscribe(Subscription s) {
-//                        s.request(2);
-//                    }
+//        })
+//                .observeOn(Schedulers.computation())
+//                .subscribeOn(Schedulers.newThread())
+//        .subscribe(new Observer<String>() {
+//            @Override
+//            public void onSubscribe(Disposable d) {
+//                mCompositeDisposable.add(d);
+//            }
 //
-//                    @Override
-//                    public void onNext(Long aLong) {
-//                        Log.i(TAG, "onNext: " + aLong);
-//                        aLong/=0;
+//            @Override
+//            public void onNext(String s) {
+//                try {
+//                    Thread.sleep(100);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//                Log.i(TAG, "onNext: "+s);
+//            }
 //
-//                    }
+//            @Override
+//            public void onError(Throwable e) {
 //
-//                    @Override
-//                    public void onError(Throwable t) {
-//                        Log.i(TAG, "onError: ");
-//                    }
+//            }
 //
-//                    @Override
-//                    public void onComplete() {
+//            @Override
+//            public void onComplete() {
 //
-//                    }
-//                });
-//        Flowable<Long> flowable =
-//                Flowable.create(e -> {
-//                    Observable.interval(1, TimeUnit.MILLISECONDS)
-//                            .take(Integer.MAX_VALUE)
-//                            .subscribe(e::onNext);
-//                }, BackpressureStrategy.DROP);
-//
-//
-//        Observable<Long> observable =
-//                Observable.create((ObservableOnSubscribe<Long>) e -> {
-//                    Observable.interval(1, TimeUnit.MILLISECONDS)
-//                            .take(Integer.MAX_VALUE)
-//                            .subscribe(e::onNext);
-//                });
-//        flowable.subscribe(i -> {
-//            Thread.sleep(100);
-//            Log.v("TEST", "out : " + i);
-//        });
-//        observable.subscribe(i -> {
-//            Thread.sleep(100);
-//            Log.v("TEST", "out2 : " + i);
-////        });
-//    Flowable.create(new FlowableOnSubscribe<Integer>() {
-//        @Override
-//        public void subscribe(FlowableEmitter<Integer> e) throws Exception {
-//            int i=0;
-//            e.onNext(++i);
-//            e.onNext(++i);
-//            e.onComplete();
-//        }
-//    },BackpressureStrategy.BUFFER).subscribe(new Subscriber<Integer>() {
-//        @Override
-//        public void onSubscribe(Subscription s) {
-//            s.request(1);
-//        }
-//
-//        @Override
-//        public void onNext(Integer integer) {
-//            Log.i(TAG, "onNext: ");
-//        }
-//
-//        @Override
-//        public void onError(Throwable t) {
-//            Log.i(TAG, "onError: ");
-//
-//        }
-//
-//        @Override
-//        public void onComplete() {
-//
-//        }
-//    });
+//            }
+//        })
+//        ;
     }
 
     @Override

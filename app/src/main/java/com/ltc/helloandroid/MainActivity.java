@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.ltc.helloandroid.circleimaview.RoundImaActivity;
 import com.ltc.helloandroid.databinding.DataBindingActivity;
 import com.ltc.helloandroid.rxjava2.Rxjava2Activity;
+import com.ltc.helloandroid.tinker.app.TinkerActivity;
 
 import org.xmlpull.v1.XmlPullParser;
 
@@ -22,7 +23,7 @@ import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String TAG = "MainActivity";
+    private static final String TAG = "TinkerActivity";
 
     @Bind(R.id.data_binding)
     Button mDataBinding;
@@ -48,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState, outPersistentState);
     }
 
-    @OnClick({R.id.data_binding, R.id.circle_ima,R.id.rxjava_2})
+    @OnClick({R.id.data_binding, R.id.circle_ima, R.id.rxjava_2, R.id.tinker})
     public void onClick(View view) {
         Intent intent = null;
         switch (view.getId()) {
@@ -59,8 +60,13 @@ public class MainActivity extends AppCompatActivity {
                 intent = new Intent(this, RoundImaActivity.class);
                 break;
             case R.id.rxjava_2:
-                intent=new Intent(this, Rxjava2Activity.class);
+                intent = new Intent(this, Rxjava2Activity.class);
                 break;
+            case R.id.tinker:
+                intent = new Intent(this, TinkerActivity.class);
+                break;
+
+
         }
         startActivity(intent);
 
