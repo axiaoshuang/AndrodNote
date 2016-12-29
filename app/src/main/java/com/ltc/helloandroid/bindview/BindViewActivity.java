@@ -8,6 +8,10 @@ import android.widget.Toast;
 
 import com.ltc.helloandroid.R;
 
+/**
+ * 依赖注入findviewbyid和onlcik事件
+ * butterknife基于编译时注入代码 这个比较简单属于运行时注入
+ */
 
 public class BindViewActivity extends AppCompatActivity {
     @BindView(R.id.bind_text1)
@@ -21,8 +25,9 @@ public class BindViewActivity extends AppCompatActivity {
         MyBindView.bind(this);
       mTextView1.setText("bind success");
     }
-    @Onclick(R.id.bind_text1)
-    private void  click(View view){
-        Toast.makeText(this, "111", Toast.LENGTH_SHORT).show();
+    @Onclick({R.id.bind_text1,R.id.bind_text2})
+    private  void  textClick(View view){
+        Toast.makeText(this, "view="+view.toString(), Toast.LENGTH_SHORT).show();
+
     }
 }
