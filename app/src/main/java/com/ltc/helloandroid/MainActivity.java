@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.ltc.helloandroid.bindview.BindViewActivity;
 import com.ltc.helloandroid.circleimaview.RoundImaActivity;
 import com.ltc.helloandroid.databinding.DataBindingActivity;
 import com.ltc.helloandroid.rxjava2.Rxjava2Activity;
@@ -49,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState, outPersistentState);
     }
 
-    @OnClick({R.id.data_binding, R.id.circle_ima, R.id.rxjava_2, R.id.tinker})
+    @OnClick({R.id.data_binding, R.id.circle_ima, R.id.rxjava_2, R.id.tinker,R.id.bindView})
     public void onClick(View view) {
         Intent intent = null;
         switch (view.getId()) {
@@ -64,6 +65,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.tinker:
                 intent = new Intent(this, TinkerActivity.class);
+                break;
+            case R.id.bindView:
+                intent = new Intent(this, BindViewActivity.class);
                 break;
 
 
