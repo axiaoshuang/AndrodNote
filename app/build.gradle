@@ -27,7 +27,7 @@ android {
          * so we can get the newly git version easily!
          */
         buildConfigField "String", "TINKER_ID", "\"${getTinkerIdValue()}\""
-        buildConfigField "String", "PLATFORM",  "\"all\""
+        buildConfigField "String", "PLATFORM", "\"all\""
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -69,17 +69,18 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
+    //optional, help to generate the final application
+    //tinker's main Android lib
     compile 'com.android.support:appcompat-v7:24.0.0'
     compile 'com.android.support:recyclerview-v7:24.0.0'
     compile 'com.google.android:flexbox:0.2.3'
     compile 'com.jakewharton:butterknife:7.0.0'
     compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'io.reactivex.rxjava2:rxjava:2.0.3'
-    //optional, help to generate the final application
-    provided('com.tencent.tinker:tinker-android-anno:1.7.6')
-    //tinker's main Android lib
-    compile('com.tencent.tinker:tinker-android-lib:1.7.6')
+    compile 'com.tencent.tinker:tinker-android-lib:1.7.6'
+    compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha8'
     testCompile 'junit:junit:4.12'
+    provided 'com.tencent.tinker:tinker-android-anno:1.7.6'
 }
 def bakPath = file("${buildDir}/bakApk/")
 
@@ -90,7 +91,7 @@ def bakPath = file("${buildDir}/bakApk/")
  */
 ext {
     //for some reason, you may want to ignore tinkerBuild, such as instant run debug build?
-    tinkerEnabled = true
+    tinkerEnabled = false
 
     //for normal build
     //old apk file to build patch apk
@@ -316,7 +317,7 @@ if (buildWithTinker()) {
     }
 
     List<String> flavors = new ArrayList<>();
-    project.android.productFlavors.each {flavor ->
+    project.android.productFlavors.each { flavor ->
         flavors.add(flavor.name)
     }
     boolean hasFlavors = flavors.size() > 0
