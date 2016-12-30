@@ -50,6 +50,12 @@ public class MainActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState, outPersistentState);
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ButterKnife.unbind(this);
+    }
+
     @OnClick({R.id.data_binding, R.id.circle_ima, R.id.rxjava_2, R.id.tinker,R.id.bindView})
     public void onClick(View view) {
         Intent intent = null;
