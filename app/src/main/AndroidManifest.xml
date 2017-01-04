@@ -31,6 +31,8 @@
         </activity>
         <activity android:name=".bindview.BindViewActivity">
         </activity>
+        <activity android:name=".designpatterns.DesignPatternsActivity">
+        </activity>
     </application>
 
 </manifest>

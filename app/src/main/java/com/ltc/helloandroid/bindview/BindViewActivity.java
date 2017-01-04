@@ -1,5 +1,9 @@
 package com.ltc.helloandroid.bindview;
 
+import android.os.Looper;
+import android.support.annotation.MainThread;
+import android.support.annotation.UiThread;
+import android.support.annotation.WorkerThread;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -7,6 +11,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ltc.helloandroid.R;
+
+import io.reactivex.annotations.BackpressureSupport;
 
 /**
  * 依赖注入findviewbyid和onlcik事件
@@ -23,8 +29,10 @@ public class BindViewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bind_view);
         MyBindView.bind(this);
-      mTextView1.setText("bind success");
+        mTextView1.setText("bind success");
+
     }
+
     @Onclick({R.id.bind_text1,R.id.bind_text2})
     private  void  textClick(View view){
         Toast.makeText(this, "view="+view.toString(), Toast.LENGTH_SHORT).show();

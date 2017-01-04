@@ -48,7 +48,7 @@ public class Rxjava2Activity extends AppCompatActivity {
         mCompositeDisposable = new CompositeDisposable();
         ButterKnife.bind(this);
 //        //支持背压
-         Flowable.create((FlowableOnSubscribe<Integer>) e -> {
+        Flowable.create((FlowableOnSubscribe<Integer>) e -> {
 
             for (int i = 0; i < 127; i++) {
                 e.onNext(i);
@@ -60,12 +60,12 @@ public class Rxjava2Activity extends AppCompatActivity {
                 .subscribe(new Subscriber<Integer>() {
                     @Override
                     public void onSubscribe(Subscription s) {
-                            s.request(0);
+                        s.request(0);
                     }
 
                     @Override
                     public void onNext(Integer integer) {
-                        Log.i(TAG, "onNext: "+integer);
+                        Log.i(TAG, "onNext: " + integer);
                         try {
                             Thread.sleep(100);
                         } catch (InterruptedException e) {
@@ -75,7 +75,7 @@ public class Rxjava2Activity extends AppCompatActivity {
 
                     @Override
                     public void onError(Throwable t) {
-                        Log.i(TAG, "onError: "+t.toString());
+                        Log.i(TAG, "onError: " + t.toString());
 
                     }
 
@@ -89,7 +89,7 @@ public class Rxjava2Activity extends AppCompatActivity {
 //                    Thread.sleep(100);
 //                }, throwable -> Log.d("JG", throwable.toString()));
 
-         //   mCompositeDisposable.add(subscribe);
+        //   mCompositeDisposable.add(subscribe);
 
         //不支持背压
 //        Observable.create(new ObservableOnSubscribe<String>() {

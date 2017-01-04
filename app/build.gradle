@@ -45,6 +45,7 @@ android {
     }
     sourceSets {
         main {
+
             jniLibs.srcDirs = ['libs']
         }
     }
@@ -71,6 +72,7 @@ dependencies {
 
     //optional, help to generate the final application
     //tinker's main Android lib
+
     compile 'com.android.support:appcompat-v7:24.0.0'
     compile 'com.android.support:recyclerview-v7:24.0.0'
     compile 'com.google.android:flexbox:0.2.3'

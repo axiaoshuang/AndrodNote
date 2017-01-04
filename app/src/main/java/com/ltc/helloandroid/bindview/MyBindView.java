@@ -4,12 +4,15 @@ import android.app.Activity;
 import android.content.res.Resources;
 import android.databinding.tool.expr.StaticIdentifierExpr;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.View;
 
 import com.ltc.helloandroid.R;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -18,7 +21,6 @@ import java.lang.reflect.Method;
 /**
  * Created by litiancheng on 2016/12/29.
  */
-
 public class MyBindView {
 
 
@@ -29,9 +31,8 @@ public class MyBindView {
     }
 
 
-    private static void clickView(Object object,View parentView) {
+    private static void clickView(Object object,@Nullable View parentView) {
         //拿到所有方法
-
         Method[] methods = object.getClass().getDeclaredMethods();
         for (Method method : methods) {
             //拿到注解
