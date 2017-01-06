@@ -75,8 +75,6 @@ public class MainActivity extends AppCompatActivity {
             case R.id.bindView:
                 intent = new Intent(this, BindViewActivity.class);
                 break;
-
-
         }
         startActivity(intent);
 
