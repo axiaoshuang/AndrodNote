@@ -16,7 +16,7 @@ import io.reactivex.annotations.BackpressureSupport;
 
 /**
  * 依赖注入findviewbyid和onlcik事件
- * butterknife基于编译时注入代码 这个比较简单属于运行时注入
+ * butterknife基于编译时注入代码 这个比较简单属于运行时注入 会影响效率
  */
 
 public class BindViewActivity extends AppCompatActivity {

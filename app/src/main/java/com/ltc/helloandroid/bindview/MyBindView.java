@@ -20,18 +20,20 @@ import java.lang.reflect.Method;
 
 /**
  * Created by litiancheng on 2016/12/29.
+ *
+ *
  */
 public class MyBindView {
 
 
     public static void bind(@NonNull Activity activity) {
-        bindView(activity,null);
-        clickView(activity,null);
+        bindView(activity, null);
+        clickView(activity, null);
 
     }
 
 
-    private static void clickView(Object object,@Nullable View parentView) {
+    private static void clickView(Object object, @Nullable View parentView) {
         //拿到所有方法
         Method[] methods = object.getClass().getDeclaredMethods();
         for (Method method : methods) {
@@ -48,23 +50,19 @@ public class MyBindView {
                     if (View.class.isAssignableFrom(aClass)) {
                         for (int i : id) {
                             View view;
-                            if (parentView==null) {
-                                 view = ((Activity) object).findViewById(i);
-                            }
-                            else
-                                view=parentView.findViewById(i);
+                            if (parentView == null) {
+                                view = ((Activity) object).findViewById(i);
+                            } else
+                                view = parentView.findViewById(i);
                             if (view != null) {
                                 method.setAccessible(true);
-                                view.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        try {
-                                            method.invoke(object, v);
-                                        } catch (IllegalAccessException e) {
-                                            e.printStackTrace();
-                                        } catch (InvocationTargetException e) {
-                                            e.printStackTrace();
-                                        }
+                                view.setOnClickListener(v -> {
+                                    try {
+                                        method.invoke(object, v);
+                                    } catch (IllegalAccessException e) {
+                                        e.printStackTrace();
+                                    } catch (InvocationTargetException e) {
+                                        e.printStackTrace();
                                     }
                                 });
                             }
@@ -82,7 +80,7 @@ public class MyBindView {
 
     }
 
-    private static void bindView(Object object,View view) {
+    private static void bindView(Object object, View view) {
 
         //拿到所有的成员
         Field[] declaredFields = object.getClass().getDeclaredFields();
@@ -95,10 +93,9 @@ public class MyBindView {
                 int value = annotation.value();
                 field.setAccessible(true);
                 if (value != 0) {
-
                     try {
-                        if (view==null)
-                        field.set(object, ((Activity)object).findViewById(value));
+                        if (view == null)
+                            field.set(object, ((Activity) object).findViewById(value));
                         else
                             field.set(object, view.findViewById(value));
 
@@ -110,13 +107,13 @@ public class MyBindView {
             }
         }
     }
+
     public static void bind(@NonNull Fragment fragment, @NonNull View view) {
         bindView(fragment, view);
-        clickView(fragment,view);
+        clickView(fragment, view);
 
 
     }
-
 
 
 }

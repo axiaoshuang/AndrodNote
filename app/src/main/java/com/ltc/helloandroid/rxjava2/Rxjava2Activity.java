@@ -60,7 +60,7 @@ public class Rxjava2Activity extends AppCompatActivity {
                 .subscribe(new Subscriber<Integer>() {
                     @Override
                     public void onSubscribe(Subscription s) {
-                        s.request(0);
+                        s.request(1);
                     }
 
                     @Override
