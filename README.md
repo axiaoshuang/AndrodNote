@@ -3,4 +3,6 @@
 
 [encrypt](https://github.com/litian1a/AndrodNote/blob/master/md/encrypt.md).
 
+[sort](https://github.com/litian1a/AndrodNote/blob/master/md/sort.md).
+
 

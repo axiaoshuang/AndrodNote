@@ -14,6 +14,7 @@ import com.ltc.helloandroid.bindview.BindViewActivity;
 import com.ltc.helloandroid.circleimaview.RoundImaActivity;
 import com.ltc.helloandroid.databinding.DataBindingActivity;
 import com.ltc.helloandroid.rxjava2.Rxjava2Activity;
+import com.ltc.helloandroid.sort.SortActivity;
 import com.ltc.helloandroid.tinker.app.TinkerActivity;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -56,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.unbind(this);
     }
 
-    @OnClick({R.id.data_binding, R.id.circle_ima, R.id.rxjava_2, R.id.tinker,R.id.bindView})
+    @OnClick({R.id.data_binding, R.id.circle_ima, R.id.rxjava_2, R.id.tinker, R.id.bindView, R.id.sort})
     public void onClick(View view) {
         Intent intent = null;
         switch (view.getId()) {
@@ -74,6 +75,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.bindView:
                 intent = new Intent(this, BindViewActivity.class);
+                break;
+            case R.id.sort:
+                intent = new Intent(this, SortActivity.class);
                 break;
         }
         startActivity(intent);
