@@ -91,6 +91,9 @@
 当数据量很大适宜采用该方法。采用二分法查找时，数据需是排好序的。主要思想是：（设查找的数组区间为array[low, high]）
 ##思路
 （1）确定该区间的中间位置K（2）将查找的值T与array[k]比较。若相等，查找成功返回此位置；否则确定新的查找区域，继续二分查找。区域确定如下：a.array[k]>T 由数组的有序性可知array[k,k+1,……,high]>T;故新的区间为array[low,……，K-1]b.array[k]<T 类似上面查找区间为array[k+1,……，high]。每一次查找与中间值比较，可以确定是否查找成功，不成功当前查找区间缩小一半，递归找，即可。时间复杂度:O(log2n)。
+##排序比较
+![sort pic](https://github.com/litian1a/AndrodNote/blob/master/pic/sortPic.jpg)
+
 ##Code
 ```
 
