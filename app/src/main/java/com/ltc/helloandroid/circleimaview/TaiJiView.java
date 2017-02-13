@@ -70,14 +70,11 @@ public class TaiJiView extends View {
     }
     float rotate;
     private void startRotate() {
-        postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (isVisible) {
-                    rotate += 5;
-                    invalidate();
-                    startRotate();
-                }
+        postDelayed(() -> {
+            if (isVisible) {
+                rotate += 5;
+                invalidate();
+                startRotate();
             }
         },80);
     }

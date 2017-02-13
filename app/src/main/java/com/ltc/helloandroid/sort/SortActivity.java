@@ -1,5 +1,6 @@
 package com.ltc.helloandroid.sort;
 
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -50,7 +51,7 @@ public class SortActivity extends AppCompatActivity {
 
     }
 
-    //选择排序
+    //选择排序 时间复杂度 n的平方 空间复杂度1
     void selectionSort(int[] arrays) {
 
 //        for (int i = 0; i < arrays.length; i++) {
@@ -75,7 +76,7 @@ public class SortActivity extends AppCompatActivity {
     }
 
 
-    //冒泡排序
+    //冒泡排序 时间复杂度n的平方  空间复杂度1
     void bubbleSort(int s[]) {
         for (int i = 0; i < s.length - 1; i++) {
             for (int j = 0; j < s.length - i - 1; j++) {
@@ -92,10 +93,9 @@ public class SortActivity extends AppCompatActivity {
         s[y] = temp;
     }
 
-    //快速排序
+    //快速排序 时间，空间复杂度nlog2n
     void quick_sort(int s[], int l, int r) {
         if (l < r) {
-            //Swap(s[l], s[(l + r) / 2]); //将中间的这个数和第一个数交换 参见注1
             int i = l, j = r, x = s[l];
             while (i < j) {
                 while (i < j && s[j] >= x) // 从右向左找第一个小于x的数
@@ -109,11 +109,11 @@ public class SortActivity extends AppCompatActivity {
                     s[j--] = s[i];
             }
             s[i] = x;
-            quick_sort(s, l, i - 1); // 递归调用
-            quick_sort(s, i + 1, r);
+            quick_sort(s, l, i-1); // 递归调用
+            quick_sort(s, i+1, r);
         }
     }
-    //二分查找  对有序数组才有效
+    //二分查找  对有序数组才有效 时间复杂度 log2n
 
     /**
      *

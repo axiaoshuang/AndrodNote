@@ -30,14 +30,9 @@ public class RoundImaActivity extends AppCompatActivity {
         List<PieChartView.PieChartData> pieChartDatas = new ArrayList<>();
         pieChartDatas.add(new PieChartView.PieChartData(0, "淘宝", 40));
         pieChartDatas.add(new PieChartView.PieChartData(0, "京东", 20));
-        pieChartDatas.add(new PieChartView.PieChartData(0, "其他", 40));
+        pieChartDatas.add(new PieChartView.PieChartData(0, "其他", 30));
         mPieChart.addPieChartDatas(pieChartDatas);
-        mPieChart.setPieChartItemListener(new PieChartView.PieChartItemListener() {
-            @Override
-            public void onPieChartItemClick(PieChartView.PieChartData data) {
-                Toast.makeText(RoundImaActivity.this, data.getTypeName(), Toast.LENGTH_SHORT).show();
-            }
-        });
+        mPieChart.setPieChartItemListener(data -> Toast.makeText(RoundImaActivity.this, data.getTypeName(), Toast.LENGTH_SHORT).show());
 
 
     }
