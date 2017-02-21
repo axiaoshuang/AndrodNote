@@ -97,7 +97,7 @@ public class SortActivity extends AppCompatActivity {
     void quick_sort(int s[], int l, int r) {
         if (l < r) {
             int i = l, j = r, x = s[l];
-            while (i < j) {
+            while(i < j) {
                 while (i < j && s[j] >= x) // 从右向左找第一个小于x的数
                     j--;
                 if (i < j)
@@ -113,7 +113,7 @@ public class SortActivity extends AppCompatActivity {
             quick_sort(s, i+1, r);
         }
     }
-    //二分查找  对有序数组才有效 时间复杂度 log2n
+    //二分查找  对有序数组才有效 时间复杂度 logn
 
     /**
      *

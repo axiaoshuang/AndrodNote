@@ -5,4 +5,6 @@
 
 [排序](https://github.com/litian1a/AndrodNote/blob/master/md/sort.md).
 
+[gc算法简述](https://github.com/litian1a/AndrodNote/blob/master/md/gc.md).
+
 
