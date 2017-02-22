@@ -15,6 +15,7 @@
         // int result permits bitmaps up to 46,340 x 46,340
         return getRowBytes() * getHeight();
     }
+```
 
 以上代码分析height就是原图片的高，而getRowBytes的值与bitmap格式有关，如果ARGB-8888 每个像素占8bit 总共32bit，4字节，所以需要*4，有关bitmap格式表对应的字节如下：
 
