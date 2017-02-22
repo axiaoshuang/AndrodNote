@@ -18,7 +18,7 @@ import com.tencent.tinker.loader.app.DefaultApplicationLike;
 import com.tencent.tinker.loader.shareutil.ShareConstants;
 
 /**
- * Created by litiancheng on 2016/12/27.
+ * Created by ltc on 2016/12/27.
  */
 @SuppressWarnings("unused")
 @DefaultLifeCycle(application = "com.ltc.helloandroid.MainApplication",

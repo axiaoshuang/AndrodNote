@@ -7,4 +7,6 @@
 
 [gc算法简述](https://github.com/litian1a/AndrodNote/blob/master/md/gc.md).
 
+[Bitmap内存分析](https://github.com/litian1a/AndrodNote/blob/master/md/bitmap.md).
+
 
