@@ -6,6 +6,8 @@ public class Main {
         System.out.println(dog);
         dog = DogFactory.newInstance(DogType.Teddy);
         System.out.println(dog);
+        System.out.println(-1>>2);
+
 
     }
 }
