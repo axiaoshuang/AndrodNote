@@ -6,6 +6,8 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.os.Handler;
+import android.os.HandlerThread;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -47,7 +49,6 @@ public class TaiJiView extends View {
         mWhitePaint.setStyle(Paint.Style.FILL);
         mWhitePaint.setAntiAlias(true);
         mBlackPaint.setAntiAlias(true);
-
     }
 
     @Override

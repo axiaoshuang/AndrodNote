@@ -11,7 +11,7 @@
 
 [Bitmap内存分析](https://github.com/litian1a/AndrodNote/blob/master/md/bitmap.md).
 
-[Handler源码解析](https://github.com/litian1a/AndrodNote/blob/master/md/handler.md).（未完成）
+[Handler源码解析](https://github.com/litian1a/AndrodNote/blob/master/md/handler.md).
 
 [从源码角度来看Android事件分发](https://github.com/litian1a/AndrodNote/blob/master/md/touch.md).（未完成）
 
@@ -31,6 +31,8 @@
 [Glide](https://github.com/litian1a/AndrodNote/blob/master/md/Glide.md).（未完成）
 
 [EventBus](https://github.com/litian1a/AndrodNote/blob/master/md/EventBus.md).（未完成）
+
+[Okhttp](https://github.com/litian1a/AndrodNote/blob/master/md/EventBus.md).（未完成）
 
 
 
