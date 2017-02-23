@@ -132,15 +132,7 @@
 这个方法就比较复杂了，让我们一一讲解，首先他先拿到当前线程对应的Lopper对象，然后再去拿到之前初始化好的MessageQuene，然后就进行死循环不停的从消息队列去拿消息，其中queue.next()使用的原理是epoll（阻塞在线程中当有消息则会唤醒，之后继续阻塞着），因为使用了epoll原理所以Looper不会那么频繁的去拿消息，降低了cpu的消耗。之后当有消息进入的时候，通过消息携带的target（Handler对象）去把消息发送给他，之后把消息回收在消息池中。
 
 收发消息的过程看完了 那我们再看看handler的初始化操作：
-    public Handler(Callback callback, boolean async) {
-        if (FIND_POTENTIAL_LEAKS) {
-            final Class<? extends Handler> klass = getClass();
-            if ((klass.isAnonymousClass() || klass.isMemberClass() || klass.isLocalClass()) &&
-                    (klass.getModifiers() & Modifier.STATIC) == 0) {
-                Log.w(TAG, "The following Handler class should be static or leaks might occur: " +
-                    klass.getCanonicalName());
-            }
-        }
+
         
 ```
 

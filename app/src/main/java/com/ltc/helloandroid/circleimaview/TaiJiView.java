@@ -10,12 +10,13 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.ViewGroup;
 
 /**
  * Created by ltc on 2016/11/17.
  */
 
-public class TaiJiView extends View {
+public class TaiJiView extends View {ViewGroup
 
     private Paint mWhitePaint;
     private Paint mBlackPaint;
