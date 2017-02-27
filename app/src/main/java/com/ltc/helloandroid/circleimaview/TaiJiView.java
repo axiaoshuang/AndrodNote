@@ -16,7 +16,7 @@ import android.view.ViewGroup;
  * Created by ltc on 2016/11/17.
  */
 
-public class TaiJiView extends View {ViewGroup
+public class TaiJiView extends View {
 
     private Paint mWhitePaint;
     private Paint mBlackPaint;

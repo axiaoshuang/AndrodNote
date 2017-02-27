@@ -309,5 +309,9 @@ public class HandlerThread extends Thread {
  ```
  代码不多，其实比较简单，就是帮你做好了 Looper.prepare()和Looper.loop操作避免开发者忘记，然后将Looper对象当成线程的成员对外提供访问，再在初始化和getLooper通过notify和wait处理了并发情况。
 
- 
+ ##总结
+
+ 重新缕缕之前的流程，就是当线程开启是准备一个Looper与当前线程绑定，并且创建一个MessageQuene。MessageQuene可以把他理解成一个链表，取出的时候使用的是epoll机制是阻塞的。然后就是调用loop方法，拿到当前线程的looper对象和MessageQuene不断的轮询，等待消息队列的消息进入，一旦进入通过message绑定的target去回调对应的handlerMessage方法。然后各种通过Handler.sendxxxxx()方法对消息队列进行添加，让轮询中的looper拿到去处理。
+
+
 
