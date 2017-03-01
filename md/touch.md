@@ -544,6 +544,6 @@ View的disPatchTouchEvent非常简单，就是判断了touchListener的返回值
 
 整体的流程图如下：
 
-![touch pic](https://github.com/litian1a/AndrodNote/blob/master/pic/touch.jpg)
+![touch pic](https://github.com/litian1a/AndrodNote/blob/master/pic/touch.png)
 
 
