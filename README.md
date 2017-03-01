@@ -13,7 +13,7 @@
 
 [Handler源码解析](https://github.com/litian1a/AndrodNote/blob/master/md/handler.md).
 
-[从源码角度来看Android事件分发](https://github.com/litian1a/AndrodNote/blob/master/md/touch.md).（未完成）
+[从源码角度来看Android事件分发](https://github.com/litian1a/AndrodNote/blob/master/md/touch.md).
 
 [Android自定义View](https://github.com/litian1a/AndrodNote/blob/master/md/view.md).（未完成）
 
